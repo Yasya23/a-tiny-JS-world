@@ -7,7 +7,53 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
+const dog = {
+  species: "dog",
+  name: "Bob",
+  gender: "male",
+  legs: 4,
+  hands: 0,
+  saying: "woof",
+};
 
+const cat = {
+  species: "cat",
+  name: "Grey",
+  gender: "male",
+  legs: 4,
+  hands: 0,
+  saying: "meow",
+};
+
+const man = {
+  species: "human",
+  name: "Anton",
+  gender: "male",
+  legs: 2,
+  hands: 2,
+  saying: "Have a good day!",
+};
+
+const woman = {
+  species: "human",
+  name: "Anna",
+  gender: "female",
+  legs: 2,
+  hands: 2,
+  saying: "Good luck!",
+};
+
+const catWoman = { ...cat };
+catWoman.name = "Luci";
+catWoman.gender = "female";
+
+const inhabitants = [dog, cat, man, woman, catWoman];
+const properties = ["species", "name", "gender", "legs", "hands", "saying"];
+
+inhabitants.forEach(function (elem) {
+  let result = properties.map((key) => elem[key]);
+  print(result.join("; "));
+});
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -27,5 +73,3 @@
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-
