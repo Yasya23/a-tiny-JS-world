@@ -1,75 +1,61 @@
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-   Complete the below for code reviewers' convenience:
+class Inhabitants {
+  constructor(species, name, gender) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+  }
 
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
-   */
+  showProperties() {
+    return `${this.species}; ${this.name}; ${this.gender}`;
+  }
+}
 
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
-const dog = {
-  species: "dog",
-  name: "Bob",
-  gender: "male",
-  legs: 4,
-  hands: 0,
-  saying: "woof",
-};
+class Human extends Inhabitants {
+  constructor(name, gender, saying) {
+    super("human", name, gender);
+    this.hands = 2;
+    this.legs = 2;
+    this.saying = saying;
+  }
 
-const cat = {
-  species: "cat",
-  name: "Grey",
-  gender: "male",
-  legs: 4,
-  hands: 0,
-  saying: "meow",
-};
+  showProperties() {
+    return `${super.showProperties()}; ${this.hands}; ${this.legs}; ${
+      this.saying
+    }`;
+  }
+}
 
-const man = {
-  species: "human",
-  name: "Anton",
-  gender: "male",
-  legs: 2,
-  hands: 2,
-  saying: "Have a good day!",
-};
+class Animal extends Inhabitants {
+  constructor(species, name, gender, saying) {
+    super(species, name, gender);
+    this.paws = 4;
+    this.saying = saying;
+  }
+  showProperties() {
+    return `${super.showProperties()}; ${this.paws}; ${this.saying}`;
+  }
+}
 
-const woman = {
-  species: "human",
-  name: "Anna",
-  gender: "female",
-  legs: 2,
-  hands: 2,
-  saying: "Good luck!",
-};
+class Cat extends Animal {
+  constructor(name, gender, saying) {
+    super("cat", name, gender, saying);
+  }
+}
 
-const catWoman = { ...cat };
-catWoman.name = "Luci";
-catWoman.gender = "female";
+class Dog extends Animal {
+  constructor(name, gender, saying) {
+    super("dog", name, gender, saying);
+  }
+}
 
-const inhabitants = [dog, cat, man, woman, catWoman];
-const properties = ["species", "name", "gender", "legs", "hands", "saying"];
+const dog = new Dog("Bob", "male", "woof");
+const cat = new Cat("Grey", "male", "meow");
+const catWoman = new Cat("Lily", "female", "meow");
+const man = new Human("Anton", "male", "Have a good day!");
+const woman = new Human("Anna", "female", "Good luck!");
 
-inhabitants.forEach(function (elem) {
-  let result = properties.map((key) => elem[key]);
-  print(result.join("; "));
+const inhabitants = [dog, cat, catWoman, man, woman];
+
+inhabitants.forEach(function (inhabitant) {
+  print(inhabitant.showProperties());
 });
-
-// ======== OUTPUT ========
-/* Use print(message) for output.
-   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
-
-   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-   However, please, REFRAIN from improving visuals at least until your code is reviewed
-   so code reviewers might focus on a single file that is index.js.
-   */
-
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
-
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
